@@ -14,7 +14,7 @@
 - ✅ bind singletons and reset if necessary
 - ✅ bind factories
 - ✅ support for swapping dependencies
-- ✅ makes testing a breeze
+- ✅ simplfies testing / mocking
 
 ### Installation
 
@@ -185,7 +185,9 @@ container.bindFactory(HttpClient, () => new HttpClient());
 container.bound(HttpClient); // true
 ```
 
-- `unbind` - Remove the given binding from the container entirely.
+#### `unbind<T>(binding: Binding<T>): void`
+
+Remove the given binding from the container entirely.
 
 ```ts
 container.bindFactory(HttpClient, () => new HttpClient());
