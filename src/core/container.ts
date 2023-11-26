@@ -42,7 +42,7 @@ export function createContainer() {
 
   /**
    * Reset a singleton value. If a value has been previously resolved and is
-   * registered as a singleton, this will keep the binding but reset the singleton value
+   * bound as a singleton, this will keep the binding but reset the singleton value
    * until the next resolve.
    */
   function resetSingleton<T>(binding: Binding<T>) {
