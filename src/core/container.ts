@@ -18,14 +18,14 @@ export function createContainer() {
   /**
    * Bind a dependency to the container as a singleton.
    */
-  function bindSingleton<T>(binding: Binding<T>, factory: FactoryFunction<T>) {
+  function bindSingleton<T>(binding: Binding<T>, factory: FactoryFunction<T>): void {
     bind(binding, factory, Scope.Singleton);
   }
 
   /**
    * Bind a dependency to the container as a factory. Each time the dependency is resolved the container will call the factory function.
    */
-  function bindFactory<T>(binding: Binding<T>, factory: FactoryFunction<T>) {
+  function bindFactory<T>(binding: Binding<T>, factory: FactoryFunction<T>): void {
     bind(binding, factory, Scope.Factory);
   }
 
@@ -45,7 +45,7 @@ export function createContainer() {
    * bound as a singleton, this will keep the binding but reset the singleton value
    * until the next resolve.
    */
-  function resetSingleton<T>(binding: Binding<T>) {
+  function resetSingleton<T>(binding: Binding<T>): void {
     if (resolveBindings.has(binding)) {
       resolveBindings.delete(binding);
     }
@@ -61,7 +61,7 @@ export function createContainer() {
   /**
    * Remove the given binding from the container entirely.
    */
-  function unbind<T>(binding: Binding<T>) {
+  function unbind<T>(binding: Binding<T>): void {
     if (bound(binding)) {
       bindingConfigs.delete(binding);
       resolveBindings.delete(binding);
@@ -72,7 +72,7 @@ export function createContainer() {
    * Swap the old binding's value with the new value.
    * This is useful for testing.
    */
-  function swap<T>(oldBinding: Binding<T>, newBinding: FactoryFunction<T>) {
+  function swap<T>(oldBinding: Binding<T>, newBinding: FactoryFunction<T>): void {
     if (!bound(oldBinding)) {
       throw new NotBoundException(oldBinding);
     }

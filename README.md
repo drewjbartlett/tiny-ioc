@@ -59,7 +59,9 @@ export async function makeRequest() {
 
 ### API
 
-- `bind` - Bind a dependency with a given scope.
+#### `bind<T>(binding: Binding<T>, value: FactoryFunction<T>, scope: Scope): void` 
+
+Bind a dependency with a given scope.
 
 ```ts
 import { createContainer, Scope } from '@drewjbartlett/tiny-ioc';
@@ -71,7 +73,9 @@ container.bind(AnotherClass, () => new AnotherClass(), Scope.Factory);
 
 ```
 
-- `bindSingleton` - Bind a dependency to the container as a singleton.
+#### `bindSingleton<T>(binding: Binding<T>, factory: FactoryFunction<T>): void`
+  
+Bind a dependency to the container as a singleton.
 
 ```ts
 class Total {
@@ -80,7 +84,7 @@ class Total {
 
 let count = 0;
 
-container.bindFactory(
+container.bindSingleton(
   Total,
   () => {
     count++;
@@ -96,7 +100,9 @@ container.get(Total).count; // 1
 
 ```
 
-- `bindFactory` - Bind a dependency to the container as a factory. Each time the dependency is resolved the container will call the factory function.
+#### `bindFactory<T>(binding: Binding<T>, factory: FactoryFunction<T>): void`
+
+Bind a dependency to the container as a factory. Each time the dependency is resolved the container will call the factory function.
 
 ```ts
 class Total {
@@ -121,7 +127,9 @@ container.get(Total).count; // 4
 ```
 
 
-- `bindOnce` - Only bind the given value if there is not already a binding.
+#### `bindOnce<T>(binding: Binding<T>, value: FactoryFunction<T>, scope: Scope): void`
+
+Only bind the given value if there is not already a binding.
 
 ```ts
 container.bindOnce(HttpClient, () => new HttpClient({ baseURL: 'baseURL 1' }), Scope.Singleton);
@@ -130,13 +138,17 @@ container.bindOnce(HttpClient, () => new HttpClient({ baseURL: 'baseURL 2' }), S
 container.get(HttpClient).baseURL // 'baseURL 1'
 ```
 
-- `get` - Attempt to resolve a given binding. Will throw if there is no binding found.
+#### `get<T>(binding: Binding<T>): T`
+
+Attempt to resolve a given binding. Will throw a `NotBoundException` if there is no binding found.
 
 ```ts
 container.get(SomeDependency);
 ```
 
-- `resetSingleton` - Reset a singleton value. 
+#### `resetSingleton<T>(binding: Binding<T>): void`
+
+Reset a singleton value. 
   
 If a value has been previously resolved and is bound as a singleton, this will keep the binding but reset the singleton value until the next resolve. Take the example below. Each time the singleton dependency is built the count will increase. Since it's a singleton `count` will always be 1. After resetting the singleton the new value is 2 since the factory function is called again.
 
@@ -160,8 +172,10 @@ container.resetSingleton(Total);
 container.get(Total).count // 2
 ```
 
-- `bound` - Determine if a binding exists or not.
-- 
+#### `bound<T>(binding: Binding<T>): boolean` 
+
+Determine if a binding exists or not.
+
 
 ```ts
 container.bound(HttpClient); // false
@@ -183,7 +197,9 @@ container.unbind(HttpClient);
 container.get(HttpClient); // throws NotBoundException
 ```
 
-- `swap` - Swap the old binding's value with the new value. This is useful when testing.
+#### `swap<T>(oldBinding: Binding<T>, newBinding: FactoryFunction<T>): void` 
+  
+Swap the old binding's value with the new value. This is useful when testing.
 
 There may be times where swapping a dependency is necessary. Especially when testing. `swap` allows for swapping out a dependency by a given class name.
 
