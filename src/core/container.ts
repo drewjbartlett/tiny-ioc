@@ -9,27 +9,29 @@ export function createContainer() {
   const resolveBindings = new Map<Binding<any>, any>();
 
   /**
-   * Bind a value with a given scope.
+   * Bind a dependency with a given scope.
    */
   function bind<T>(binding: Binding<T>, value: FactoryFunction<T>, scope: Scope): void {
     bindingConfigs.set(binding, { scope, value });
   }
 
   /**
-   * Create a singleton in the container. After the first resolve, this returns the same value each time.
+   * Bind a dependency to the container as a singleton.
    */
   function bindSingleton<T>(binding: Binding<T>, factory: FactoryFunction<T>) {
     bind(binding, factory, Scope.Singleton);
   }
 
   /**
-   * Bind a value to a factory. This will call the function every time and not store
-   * the value in memory as a singleton.
+   * Bind a dependency to the container as a factory. Each time the dependency is resolved the container will call the factory function.
    */
   function bindFactory<T>(binding: Binding<T>, factory: FactoryFunction<T>) {
     bind(binding, factory, Scope.Factory);
   }
 
+  /**
+   * Only bind the given value if there is not already a binding.
+   */
   function bindOnce<T>(binding: Binding<T>, value: FactoryFunction<T>, scope: Scope): void {
     if (bound(binding)) {
       return;
@@ -50,7 +52,7 @@ export function createContainer() {
   }
 
   /**
-   * Determine if a function is bound or not.
+   * Determine if a binding exists or not.
    */
   function bound<T>(binding: Binding<T>): boolean {
     return bindingConfigs.has(binding);
