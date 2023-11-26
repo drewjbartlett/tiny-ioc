@@ -1,6 +1,9 @@
 {
     "name": "@drewjbartlett/ioc",
-    "repository": "https://github.com/drewjbartlett/ioc",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/drewjbartlett/ioc.git"
+    },
     "type": "module",
     "version": "0.0.1",
     "files": [
@@ -28,11 +31,11 @@
         "lint:dry": "eslint --ext .js,.ts, --ignore-path .eslintignore src"
     },
     "keywords": [
-        "i18n",
-        "internationalization",
+        "IOC",
+        "container",
+        "inversion of control",
+        "dependency injection",
         "lightweight",
-        "translations",
-        "vue",
         "typescript"
     ],
     "author": "https://github.com/drewjbartlett",
@@ -52,8 +55,5 @@
         "typescript": "^5.2.2",
         "vite": "^5.0.0",
         "vite-plugin-dts": "^3.6.3"
-    },
-    "dependencies": {
-        "deepmerge": "^4.3.1"
     }
 }
