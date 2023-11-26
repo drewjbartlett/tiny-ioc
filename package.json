@@ -1,11 +1,11 @@
 {
-    "name": "@drewjbartlett/ioc",
+    "name": "@drewjbartlett/tiny-ioc",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/drewjbartlett/ioc.git"
+        "url": "git+https://github.com/drewjbartlett/tiny-ioc.git"
     },
     "type": "module",
-    "version": "0.0.2",
+    "version": "0.0.1",
     "files": [
         "dist"
     ],
