@@ -229,7 +229,7 @@ Unit testing is made very simple when using `tiny-ioc`. You can simply swap out 
 // make-request.ts
 
 import { container } from 'path/to/container';
-import { HttpClient } from 'path/to/data-source';
+import { HttpClient } from 'path/to/http-client';
 
 export async function makeRequest() {
   try {
