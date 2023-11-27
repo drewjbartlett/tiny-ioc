@@ -132,7 +132,7 @@ container.get(Total).count; // 4
 Only bind the given value if there is not already a binding.
 
 ```ts
-container.bindOnce(HttpClient, () => new HttpClient({ baseURL: 'baseURL 1' }), Scope.Singleton);
+container.bindFactory(HttpClient, () => new HttpClient({ baseURL: 'baseURL 1' }));
 container.bindOnce(HttpClient, () => new HttpClient({ baseURL: 'baseURL 2' }), Scope.Singleton);
 
 container.get(HttpClient).baseURL // 'baseURL 1'
