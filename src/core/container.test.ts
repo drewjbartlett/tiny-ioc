@@ -86,6 +86,20 @@ describe('container', () => {
 
       expect(container.get(HttpClient).config.baseURL).toEqual('baseURL 1');
     });
+
+    it('should not bind a dependency when one is already bound', () => {
+      container.bindFactory(HttpClient, () => new HttpClient({ baseURL: 'baseURL 1' }));
+      container.bindOnce(HttpClient, () => new HttpClient({ baseURL: 'baseURL 2' }), Scope.Singleton);
+
+      expect(container.get(HttpClient).config.baseURL).toEqual('baseURL 1');
+    });
+
+    it('should not bind a dependency when one is already bound', () => {
+      container.bindSingleton(HttpClient, () => new HttpClient({ baseURL: 'baseURL 1' }));
+      container.bindOnce(HttpClient, () => new HttpClient({ baseURL: 'baseURL 2' }), Scope.Singleton);
+
+      expect(container.get(HttpClient).config.baseURL).toEqual('baseURL 1');
+    });
   });
 
   describe('bindFactory', () => {
