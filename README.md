@@ -33,7 +33,6 @@ import { createContainer, Scope } from '@drewjbartlett/tiny-ioc';
 const container = createContainer();
 
 container.bind(MyClass, () => new MyClass(), Scope.Singleton);
-
 container.bindFactory(DataSource, () => new DataSource(container.get(HttpClient)));
 container.bindSingleton(HttpClient, () => new HttpClient());
 
